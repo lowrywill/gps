@@ -5,7 +5,8 @@ const btnA1 = document.querySelector(".btn_A1");
 const btnA2 = document.querySelector(".btn_A2");
 const btnA3 = document.querySelector(".btn_A3");
 
-// REMEMBER TO MAKE THIS A PSCRIPT.JS FILE TODO
+const btnPrologue = document.querySelector(".btn_prologue");
+const btnEpilogue = document.querySelector(".btn_epilogue");
 
 const btnA1_1 = document.querySelector(".btn_A1_1");
 const btnA1_2 = document.querySelector(".btn_A1_2");
@@ -40,6 +41,8 @@ const clearSelected = function (btnType) {
     btnA1.classList.remove("selected");
     btnA2.classList.remove("selected");
     btnA3.classList.remove("selected");
+    btnPrologue.classList.remove("selected");
+    btnEpilogue.classList.remove("selected");
   }
   if (btnType == "phase" || btnType == "all") {
     btnA1_1.classList.remove("Pselected");
@@ -89,13 +92,7 @@ const startTimer = function (min, sec) {
 // SELECTING ACT ////////////////////////
 btnA1.addEventListener("click", function (e) {
   e.preventDefault();
-  clearSelected("all");
-  btnA1.classList.add("selected");
-  btnDisplay.classList.add("hide");
-  actNum = "1";
-  actName.textContent = `Act ${actNum}`;
-  // Eventually replace the above with:
-  // selectAct1();
+  selectAct1();
   puzzleImage.src = getImage(0);
 });
 
@@ -104,7 +101,8 @@ btnA2.addEventListener("click", function (e) {
   clearSelected("all");
   btnA2.classList.add("selected");
   btnDisplay.classList.add("hide");
-
+  puzzleImage.classList.remove("Xborder");
+  timerSection.classList.remove("Xborder");
   actNum = "2";
   actName.textContent = `Act ${actNum}`;
   // Eventually replace the above with:
@@ -117,9 +115,34 @@ btnA3.addEventListener("click", function (e) {
   clearSelected("all");
   btnA3.classList.add("selected");
   btnDisplay.classList.remove("hide");
+  puzzleImage.classList.remove("Xborder");
+  timerSection.classList.remove("Xborder");
   actNum = "3";
   actName.textContent = `Act ${actNum}`;
   puzzleImage.src = getImage(0);
+});
+
+// SELECTING PROL/EPIL ////////////////////
+btnPrologue.addEventListener("click", function (e) {
+  e.preventDefault();
+  clearSelected("all");
+  btnPrologue.classList.add("selected");
+  puzzleImage.classList.add("Xborder");
+  timerSection.classList.add("Xborder");
+  btnDisplay.classList.remove("hide");
+  actName.textContent = `Prologue`;
+  puzzleImage.src = "prol-epil.png";
+});
+
+btnEpilogue.addEventListener("click", function (e) {
+  e.preventDefault();
+  clearSelected("all");
+  btnEpilogue.classList.add("selected");
+  puzzleImage.classList.add("Xborder");
+  timerSection.classList.add("Xborder");
+  btnDisplay.classList.remove("hide");
+  actName.textContent = `Epilogue`;
+  puzzleImage.src = "prol-epil.png";
 });
 
 // SELECTING PHASE ////////////////////////
@@ -210,6 +233,8 @@ const selectAct1 = function () {
   clearSelected("all");
   btnA1.classList.add("selected");
   btnDisplay.classList.add("hide");
+  puzzleImage.classList.remove("Xborder");
+  timerSection.classList.remove("Xborder");
   actNum = "1";
   actName.textContent = `Act ${actNum}`;
 };
@@ -218,10 +243,10 @@ const selectAct2 = function () {
   clearSelected("all");
   btnA2.classList.add("selected");
   btnDisplay.classList.add("hide");
+  puzzleImage.classList.remove("Xborder");
+  timerSection.classList.remove("Xborder");
   actNum = "2";
   actName.textContent = `Act ${actNum}`;
 };
-
-//  May want to make rooms hide after selection and reveal acts after selection
 
 // Add "LOADING" graphic underneath?

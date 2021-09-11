@@ -1,9 +1,15 @@
 body {
-  background: #0000ff;
+  background: repeating-linear-gradient(
+    45deg,
+    gray,
+    gray 50px,
+    #777777 50px,
+    #777777 100px
+  );
 }
 
 .control_window {
-  background: #ff0000;
+  background: #222222;
   border-width: 5px;
   border-style: solid;
   padding-top: 15px;
@@ -19,6 +25,10 @@ body {
   width: 1280px;
 }
 
+.main_display {
+  width: 800px;
+}
+
 .bar {
   height: 50px;
   padding-top: 5px;
@@ -27,7 +37,25 @@ body {
   border-style: solid;
   border-width: 1px;
   border-color: black;
-  background: cornflowerblue;
+}
+
+.defaultbg {
+  background: gray;
+}
+
+.gradeschool {
+  background: #565d8d;
+  background-image: linear-gradient(to right, #565d8d, #293164);
+}
+
+.programcontrol {
+  background: #427f6d;
+  background-image: linear-gradient(to right, #427f6d, #12503e);
+}
+
+.storagecellar {
+  background: #757329;
+  background-image: linear-gradient(to right, #757329, #525015);
 }
 
 a {
@@ -64,7 +92,7 @@ a {
   display: inline-block;
   margin: 0px;
   padding: 0px;
-  margin-right: 10px;
+  margin-right: 12px;
   line-height: 40px;
   font-family: ABeeZee;
 }
@@ -102,7 +130,6 @@ a {
 .puzzle_image {
   border-width: 4px;
   border-right: 2px;
-  border-color: aqua;
   border-style: solid;
   padding: 0px;
   margin: 0px;
@@ -112,7 +139,6 @@ a {
 
 .timer_section {
   border-width: 4px;
-  border-color: aqua;
   border-style: solid;
   padding: 0px;
   margin: 0px;
@@ -125,6 +151,23 @@ a {
   font-weight: 1000;
   font-size: 500%;
   font-family: ABeeZee;
+}
+
+.Gborder {
+  border-color: #2e3da7;
+}
+
+.Pborder {
+  border-color: #32b88f;
+}
+
+.Sborder {
+  border-color: #646109;
+}
+
+.Xborder {
+  border-color: #333333;
+  background-image: linear-gradient(to bottom, #666666, #444444);
 }
 
 .selected {
