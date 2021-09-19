@@ -29,11 +29,13 @@ const timerSection = document.querySelector(".timer_section");
 const puzzleImage = document.querySelector(".puzzle_image");
 
 let actNum = 0;
+let phase = 0;
 let room = "";
 let totalSecs,
   min,
   sec = 0;
 let timer;
+let timerVisibility = true;
 
 // CLEAR ALL SELECTED
 const clearSelected = function (btnType) {
@@ -61,9 +63,10 @@ const clearSelected = function (btnType) {
   }
 };
 
+// Clear it all to start with, just in case
 clearSelected("all");
 
-// Get dynamic image
+// BACKGROUND CHANGE - Get dynamic image for background based on what act
 const getImage = function (actNum) {
   return `ProgramControl_act${actNum}.png`;
 };
@@ -72,19 +75,21 @@ const getImage = function (actNum) {
 const startTimer = function (min, sec) {
   totalSecs = min * 60 + sec;
   const tick = function () {
-    // console.log(`The timer for ${min} min and ${sec.toString().padStart(2, "0")} sec has started...`);
+    // This is the function to actually make the numbers change
     min = Math.floor(totalSecs / 60);
     sec = totalSecs - min * 60;
     totalSecs--;
-    timerSection.textContent = `${min}:${sec.toString().padStart(2, "0")}`;
+    if (timerVisibility)
+      timerSection.textContent = `${min}:${sec.toString().padStart(2, "0")}`;
     if (totalSecs < 0) {
       clearInterval(timer);
       timeoutButton();
     }
+    // console.log(totalSecs);
   };
 
-  tick();
-  timer = setInterval(tick, 1000);
+  tick(); // This calls tick() once because interval delays a second
+  timer = setInterval(tick, 1000); // This repeatedly calls the numbers to create the countdown
 
   return timer;
 };
@@ -92,31 +97,28 @@ const startTimer = function (min, sec) {
 // SELECTING ACT ////////////////////////
 btnA1.addEventListener("click", function (e) {
   e.preventDefault();
+  phase = 0;
   selectAct1();
+  clearInterval(timer);
   puzzleImage.src = getImage(0);
 });
 
 btnA2.addEventListener("click", function (e) {
   e.preventDefault();
+  phase = 0;
   clearSelected("all");
-  btnA2.classList.add("selected");
-  btnDisplay.classList.add("hide");
-  puzzleImage.classList.remove("Xborder");
-  timerSection.classList.remove("Xborder");
-  actNum = "2";
-  actName.textContent = `Act ${actNum}`;
-  // Eventually replace the above with:
-  // selectAct2();
+  selectAct2();
+  clearInterval(timer);
   puzzleImage.src = getImage(0);
 });
 
 btnA3.addEventListener("click", function (e) {
   e.preventDefault();
   clearSelected("all");
+  phase = 0;
   btnA3.classList.add("selected");
   btnDisplay.classList.remove("hide");
-  puzzleImage.classList.remove("Xborder");
-  timerSection.classList.remove("Xborder");
+  newActClassShift();
   actNum = "3";
   actName.textContent = `Act ${actNum}`;
   puzzleImage.src = getImage(0);
@@ -125,6 +127,7 @@ btnA3.addEventListener("click", function (e) {
 // SELECTING PROL/EPIL ////////////////////
 btnPrologue.addEventListener("click", function (e) {
   e.preventDefault();
+  timerVisibility = false;
   clearSelected("all");
   btnPrologue.classList.add("selected");
   puzzleImage.classList.add("Xborder");
@@ -136,6 +139,7 @@ btnPrologue.addEventListener("click", function (e) {
 
 btnEpilogue.addEventListener("click", function (e) {
   e.preventDefault();
+  timerVisibility = false;
   clearSelected("all");
   btnEpilogue.classList.add("selected");
   puzzleImage.classList.add("Xborder");
@@ -148,81 +152,170 @@ btnEpilogue.addEventListener("click", function (e) {
 // SELECTING PHASE ////////////////////////
 btnA1_1.addEventListener("click", function (e) {
   e.preventDefault();
+  phase = 1;
   selectAct1();
   btnA1_1.classList.add("Pselected");
   puzzleImage.src = getImage("1-1");
+  timerBGchange("countdown");
+  timerVisibility = true;
   clearInterval(timer);
-  startTimer(11, 0);
+  startTimer(12, 4);
 });
 
 btnA1_2.addEventListener("click", function (e) {
   e.preventDefault();
+  btnA1_2_GO();
+});
+
+const btnA1_2_GO = function () {
+  phase = 2;
   selectAct1();
   btnA1_2.classList.add("Pselected");
   puzzleImage.src = getImage("1-2");
-});
+  timerBGchange("countdown");
+  timerVisibility = true;
+};
 
 btnA1_3.addEventListener("click", function (e) {
   e.preventDefault();
+  btnA1_3_GO();
+});
+
+const btnA1_3_GO = function () {
+  phase = 3;
   selectAct1();
   btnA1_3.classList.add("Pselected");
   puzzleImage.src = getImage("1-3");
-});
+  timerBGchange("countdown");
+  timerVisibility = true;
+};
 
 btnA1_4.addEventListener("click", function (e) {
   e.preventDefault();
+  btnA1_4_GO();
+});
+
+const btnA1_4_GO = function () {
+  phase = 4;
   selectAct1();
   btnA1_4.classList.add("Pselected");
   puzzleImage.src = getImage("1-4");
-});
+  timerBGchange("countdown");
+  timerVisibility = true;
+};
 
 btnA2_1.addEventListener("click", function (e) {
   e.preventDefault();
+  phase = 1;
   selectAct2();
   btnA2_1.classList.add("Pselected");
   puzzleImage.src = getImage("2-1");
+  timerBGchange("countdown");
+  timerVisibility = true;
   clearInterval(timer);
-  startTimer(11, 0);
+  startTimer(13, 18);
 });
 
 btnA2_2.addEventListener("click", function (e) {
   e.preventDefault();
+  btnA2_2_GO();
+});
+
+const btnA2_2_GO = function () {
+  phase = 2;
   selectAct2();
   btnA2_2.classList.add("Pselected");
   puzzleImage.src = getImage("2-2");
-});
+  timerBGchange("countdown");
+  timerVisibility = true;
+};
 
 btnA2_3.addEventListener("click", function (e) {
   e.preventDefault();
+  btnA2_3_GO();
+});
+
+const btnA2_3_GO = function () {
+  phase = 3;
   selectAct2();
   btnA2_3.classList.add("Pselected");
   puzzleImage.src = getImage("2-3");
-});
+  timerBGchange("countdown");
+  timerVisibility = true;
+};
 
 // CHANGING MODE ////////////////////////
 
 btnDisplay.addEventListener("click", function (e) {
   e.preventDefault();
+  timerBGchange("countdown");
+  timerVisibility = true;
   clearSelected("phase");
   clearSelected("action");
   btnDisplay.classList.add("selected");
   puzzleImage.src = getImage(actNum);
   clearInterval(timer);
-  startTimer(11, 0);
+  startTimer(12, 58); // only does this for Act 3
 });
 
 btnSolved.addEventListener("click", function (e) {
   e.preventDefault();
   clearSelected("action");
-  clearSelected("phase");
-  clearSelected("action");
   btnSolved.classList.add("selected");
-  puzzleImage.src = getImage("S");
-  clearInterval(timer);
+  // puzzleImage.src = getImage("S"); // Don't need anymore?
+  timerBGchange("solved");
+  timerSection.textContent = "";
+  timerVisibility = false;
+
+  // This part is ProgramControl-specific to go to next phase, if applicable
+  if (actNum == 1 && totalSecs > 2) {
+    setTimeout(function () {
+      // Switch to next phase if applicable
+      switch (phase) {
+        case 1:
+          btnA1_2_GO();
+          break;
+        case 2:
+          btnA1_3_GO();
+          break;
+        case 3:
+          btnA1_4_GO();
+          break;
+        case 4:
+          //code
+          break;
+        default:
+          //code
+          break;
+      }
+    }, 2000);
+  } else if (actNum == 2 && totalSecs > 2) {
+    setTimeout(function () {
+      //Switch to next phase if applicable
+      switch (phase) {
+        case 1:
+          btnA2_2_GO();
+          break;
+        case 2:
+          btnA2_3_GO();
+          break;
+        case 3:
+          //code?
+          break;
+        default:
+          //code
+          break;
+      }
+    }, 2000);
+  } else {
+  }
 });
 
+// WHEN IT TIMES OUT - No longer a button, but triggered on timeout
 const timeoutButton = function () {
-  console.log("The timer timed out.");
+  timerSection.classList.add("timer_bg_empty");
+  timerSection.textContent = "";
+  timerBGchange("empty");
   puzzleImage.src = getImage("TO");
   btnTimeout.classList.remove("hide");
   btnSolved.classList.add("hide");
@@ -233,8 +326,7 @@ const selectAct1 = function () {
   clearSelected("all");
   btnA1.classList.add("selected");
   btnDisplay.classList.add("hide");
-  puzzleImage.classList.remove("Xborder");
-  timerSection.classList.remove("Xborder");
+  newActClassShift();
   actNum = "1";
   actName.textContent = `Act ${actNum}`;
 };
@@ -243,10 +335,26 @@ const selectAct2 = function () {
   clearSelected("all");
   btnA2.classList.add("selected");
   btnDisplay.classList.add("hide");
-  puzzleImage.classList.remove("Xborder");
-  timerSection.classList.remove("Xborder");
+  newActClassShift();
   actNum = "2";
   actName.textContent = `Act ${actNum}`;
 };
 
-// Add "LOADING" graphic underneath?
+// CHANGE CLASSES TO START ACT
+const newActClassShift = function () {
+  btnTimeout.classList.add("hide");
+  btnSolved.classList.remove("hide");
+  puzzleImage.classList.remove("Xborder");
+  timerSection.classList.remove("Xborder");
+};
+
+// CHANGE BACKGROUND IMAGE OF TIMER based on which property is passed in
+const timerBGchange = function (which) {
+  timerSection.classList.remove("timer_bg_empty");
+  timerSection.classList.remove("timer_bg_countdown");
+  timerSection.classList.remove("timer_bg_solved");
+  timerSection.classList.add(`timer_bg_${which}`);
+  return;
+};
+
+// Add "LOADING" graphic underneath just in case?

@@ -26,6 +26,7 @@ let totalSecs,
   min,
   sec = 0;
 let timer;
+let timerVisibility = true;
 
 // CLEAR ALL SELECTED
 const clearSelected = function (btnType) {
@@ -41,9 +42,10 @@ const clearSelected = function (btnType) {
   }
 };
 
+// Clear it all to start with, just in case
 clearSelected("all");
 
-// Get dynamic image
+// BACKGROUND CHANGE - Get dynamic image for background based on what act
 const getImage = function (actNum) {
   return `${room}_act${actNum}.png`;
 };
@@ -52,19 +54,21 @@ const getImage = function (actNum) {
 const startTimer = function (min, sec) {
   totalSecs = min * 60 + sec;
   const tick = function () {
-    // console.log(`The timer for ${min} min and ${sec.toString().padStart(2, "0")} sec has started...`);
+    // This is the function to actually make the numbers change
     min = Math.floor(totalSecs / 60);
     sec = totalSecs - min * 60;
     totalSecs--;
-    timerSection.textContent = `${min}:${sec.toString().padStart(2, "0")}`;
+    if (timerVisibility)
+      timerSection.textContent = `${min}:${sec.toString().padStart(2, "0")}`;
     if (totalSecs < 0) {
       clearInterval(timer);
       timeoutButton();
     }
+    // console.log(totalSecs);
   };
 
-  tick();
-  timer = setInterval(tick, 1000);
+  tick(); // This calls tick() once because interval delays a second
+  timer = setInterval(tick, 1000); // This repeatedly calls the numbers to create the countdown
 
   return timer;
 };
@@ -73,63 +77,115 @@ const startTimer = function (min, sec) {
 btnA1.addEventListener("click", function (e) {
   e.preventDefault();
   clearSelected("all");
+  timerBGchange("empty");
   btnA1.classList.add("selected");
-  puzzleImage.classList.remove("Xborder");
-  timerSection.classList.remove("Xborder");
+  newActClassShift();
   actNum = "1";
   actName.textContent = `Act ${actNum}`;
   puzzleImage.src = getImage(0);
+  // Set time allowed for the puzzle
+  if (roomLtr == "G") {
+    min = 11;
+    sec = 37;
+  } else if (roomLtr == "S") {
+    min = 9;
+    sec = 50;
+  } else {
+  }
 });
 
 btnA2.addEventListener("click", function (e) {
   e.preventDefault();
   clearSelected("all");
+  timerBGchange("empty");
   btnA2.classList.add("selected");
-  puzzleImage.classList.remove("Xborder");
-  timerSection.classList.remove("Xborder");
+  newActClassShift();
   actNum = "2";
   actName.textContent = `Act ${actNum}`;
   puzzleImage.src = getImage(0);
+  // Set time allowed for the puzzle
+  if (roomLtr == "G") {
+    min = 11;
+    sec = 22;
+  } else if (roomLtr == "S") {
+    min = 11;
+    sec = 55;
+  } else {
+  }
 });
 
 btnA3.addEventListener("click", function (e) {
   e.preventDefault();
   clearSelected("all");
+  timerBGchange("empty");
   btnA3.classList.add("selected");
-  puzzleImage.classList.remove("Xborder");
-  timerSection.classList.remove("Xborder");
+  newActClassShift();
   actNum = "3";
   actName.textContent = `Act ${actNum}`;
   puzzleImage.src = getImage(0);
+  // Set time allowed for the puzzle
+  if (roomLtr == "G") {
+    min = 8;
+    sec = 10;
+  } else if (roomLtr == "S") {
+    min = 9;
+    sec = 45;
+  } else {
+  }
 });
 
 // CHANGING MODE ////////////////////////
 
 btnDisplay.addEventListener("click", function (e) {
   e.preventDefault();
-  clearSelected("phase");
+  timerBGchange("countdown");
+  timerVisibility = true;
   clearSelected("action");
   btnDisplay.classList.add("selected");
+  btnSolved.classList.remove("hide");
   puzzleImage.src = getImage(actNum);
   clearInterval(timer);
-  startTimer(11, 0);
+  startTimer(min, sec);
 });
 
 btnSolved.addEventListener("click", function (e) {
   e.preventDefault();
   clearSelected("action");
-  clearSelected("phase");
-  clearSelected("action");
   btnSolved.classList.add("selected");
-  puzzleImage.src = getImage("S");
-  clearInterval(timer);
+  // puzzleImage.src = getImage("S"); // Don't need anymore?
+  timerBGchange("solved");
+  timerSection.textContent = "";
+  timerVisibility = false;
 });
 
+// WHEN IT TIMES OUT - No longer a button, but triggered on timeout
 const timeoutButton = function () {
-  console.log("The timer timed out.");
+  timerSection.classList.add("timer_bg_empty");
+  timerSection.textContent = "";
+  timerBGchange("empty");
   puzzleImage.src = getImage("TO");
   btnTimeout.classList.remove("hide");
   btnSolved.classList.add("hide");
+  btnDisplay.classList.remove("selected");
+  btnDisplay.classList.add("hide");
+};
+
+// CHANGE CLASSES TO START ACT
+const newActClassShift = function () {
+  btnTimeout.classList.add("hide");
+  btnSolved.classList.add("hide");
+  btnDisplay.classList.remove("hide");
+  puzzleImage.classList.remove("Xborder");
+  timerSection.classList.remove("Xborder");
+};
+
+// CHANGE BACKGROUND IMAGE OF TIMER based on which property is passed in
+const timerBGchange = function (which) {
+  timerSection.classList.remove("timer_bg_empty");
+  timerSection.classList.remove("timer_bg_countdown");
+  timerSection.classList.remove("timer_bg_solved");
+  timerSection.classList.add(`timer_bg_${which}`);
+  return;
 };
 
 // Add "LOADING" graphic underneath?
