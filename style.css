@@ -143,7 +143,6 @@ a {
   padding: 0px;
   margin: 0px;
   height: 176px;
-  background-image: url("timer_bg.png");
   background-position: right;
   background-repeat: repeat;
   text-align: center;
@@ -151,6 +150,18 @@ a {
   font-weight: 1000;
   font-size: 500%;
   font-family: ABeeZee;
+}
+
+.timer_bg_empty {
+  background-image: url("timer_bg_empty.png");
+}
+
+.timer_bg_countdown {
+  background-image: url("timer_bg_countdown.png");
+}
+
+.timer_bg_solved {
+  background-image: url("timer_bg_solved.png");
 }
 
 .Gborder {
