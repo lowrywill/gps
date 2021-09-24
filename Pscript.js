@@ -255,7 +255,7 @@ btnDisplay.addEventListener("click", function (e) {
   btnDisplay.classList.add("selected");
   puzzleImage.src = getImage(actNum);
   clearInterval(timer);
-  startTimer(12, 58); // only does this for Act 3
+  startTimer(12, 28); // only does this for Act 3
 });
 
 btnSolved.addEventListener("click", function (e) {

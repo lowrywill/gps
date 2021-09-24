@@ -86,10 +86,10 @@ btnA1.addEventListener("click", function (e) {
   // Set time allowed for the puzzle
   if (roomLtr == "G") {
     min = 11;
-    sec = 37;
+    sec = 17;
   } else if (roomLtr == "S") {
     min = 9;
-    sec = 50;
+    sec = 40;
   } else {
   }
 });
@@ -106,10 +106,10 @@ btnA2.addEventListener("click", function (e) {
   // Set time allowed for the puzzle
   if (roomLtr == "G") {
     min = 11;
-    sec = 22;
+    sec = 59;
   } else if (roomLtr == "S") {
-    min = 11;
-    sec = 55;
+    min = 12;
+    sec = 25;
   } else {
   }
 });
