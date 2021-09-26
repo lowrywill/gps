@@ -108,8 +108,8 @@ btnA2.addEventListener("click", function (e) {
     min = 11;
     sec = 59;
   } else if (roomLtr == "S") {
-    min = 12;
-    sec = 25;
+    min = 10;
+    sec = 55;
   } else {
   }
 });

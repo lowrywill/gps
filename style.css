@@ -195,6 +195,13 @@ a {
   background-color: orange;
 }
 
+.Psolved {
+  font-weight: 500;
+  text-decoration-color: white;
+  text-transform: uppercase;
+  background-color: lime;
+}
+
 .hide {
   opacity: 0;
 }
