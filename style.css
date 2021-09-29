@@ -80,6 +80,23 @@ a {
   font-family: ABeeZee;
 }
 
+.PActbutton {
+  background: #cccccc;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  height: 40px;
+  width: 110px;
+  border-radius: 8px;
+  text-align: center;
+  display: inline-block;
+  margin: 0px;
+  padding: 0px;
+  margin-right: 20px;
+  line-height: 40px;
+  font-family: ABeeZee;
+}
+
 .Pbutton {
   background: #777777;
   border-width: 1px;
