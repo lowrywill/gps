@@ -145,10 +145,10 @@ const selectAct1 = function () {
   actNum = "1";
   actName.textContent = `Act ${actNum}`;
   // For testing
-  min = 0;
-  sec = 5;
-  //min = 12;
-  //sec = 4;
+  // min = 0;
+  // sec = 5;
+  min = 12;
+  sec = 4;
 };
 
 const selectAct2 = function () {
@@ -158,10 +158,10 @@ const selectAct2 = function () {
   actNum = "2";
   actName.textContent = `Act ${actNum}`;
   // For testing
-  min = 0;
-  sec = 7;
-  //min = 13;
-  //sec = 18;
+  // min = 0;
+  // sec = 7;
+  min = 13;
+  sec = 18;
 };
 
 const selectAct3 = function () {
@@ -171,11 +171,11 @@ const selectAct3 = function () {
   actNum = "3";
   actName.textContent = `Act ${actNum}`;
   // For testing
-  min = 0;
-  sec = 30;
-  console.log("I just set Act 3 times");
-  //min = 12;
-  //sec =  28;
+  //min = 0;
+  //sec = 30;
+  //console.log("I just set Act 3 times");
+  min = 12;
+  sec =  28;
 };
 
 // SELECTING PROL/EPIL ////////////////////
